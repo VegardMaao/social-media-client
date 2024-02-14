@@ -5,8 +5,10 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test-unit",
+    "testunit": "npm run test-unit",
     "test-unit": "jest",
+    "teste2e": "npm run test-e2e",
+    "test-e2e": "cypress open",
     "build": "sass src/scss:dist/css",
     "start": "sass --watch src/scss:dist/css & live-server",
     "format": "prettier -w src/**/*.js",
