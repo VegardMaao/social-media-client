@@ -1,7 +1,20 @@
 import { login } from "./login.js";
 
 const expected = {
-  data: "data",
+  data: {
+    name: "my_username",
+    email: "first.last@stud.noroff.no",
+    avatar: {
+      url: "https://img.service.com/avatar.jpg",
+      alt: "My avatar alt text",
+    },
+    banner: {
+      url: "https://img.service.com/banner.jpg",
+      alt: "My banner alt text",
+    },
+    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....",
+  },
+  meta: {},
 };
 
 const mockFetch = jest.fn().mockResolvedValue({
