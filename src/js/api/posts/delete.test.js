@@ -12,7 +12,6 @@ global.fetch = mockFetch;
 describe("deletePost", () => {
   it("deletes an existing post in the array", async () => {
     const data = await deletePost();
-    console.dir(data);
     expect(data).toEqual(expected);
   });
 });

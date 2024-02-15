@@ -38,7 +38,6 @@ global.fetch = mockFetchSuccess;
 describe("react", () => {
   it("adds a reaction to a post", async () => {
     const data = await react("string", "string");
-    console.log(data);
     expect(data).toEqual(expected);
   });
 });
