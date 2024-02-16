@@ -1,29 +1,11 @@
 import { login } from "./login.js";
 
 const expected = {
-  data: {
-    name: "my_username",
-    email: "first.last@stud.noroff.no",
-    avatar: {
-      url: "https://img.service.com/avatar.jpg",
-      alt: "My avatar alt text",
-    },
-    banner: {
-      url: "https://img.service.com/banner.jpg",
-      alt: "My banner alt text",
-    },
-    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....",
-  },
+  name: "vegar",
+  email: "no@noroff.no",
+  banner: null,
+  avatar: null,
 };
-
-// const errorMessage = "Bad Request";
-
-const mockFetch = jest.fn().mockResolvedValue({
-  ok: true,
-  json: jest.fn().mockResolvedValue(expected),
-});
-
-// const mockFail = jest.fn().mockRejectedValue(errorMessage);
 
 class LocalStorageMock {
   constructor() {
@@ -51,11 +33,10 @@ global.localStorage = new LocalStorageMock();
 
 describe("login", () => {
   it("sends your username and password to the backend and returns a JWT when OK", async () => {
-    global.fetch = mockFetch;
-    const truedata = await login("first.last@stud.noroff.no", "mypass");
-    const localStorageAccessToken = localStorage.getItem("token");
-    console.log(localStorageAccessToken);
-    expect(truedata.data.accessToken).toEqual(expected.data.accessToken);
+    const truedata = await login("no@noroff.no", "pass123123");
+    console.log(truedata);
+    const localStorageProfile = JSON.parse(localStorage.getItem("profile"));
+    expect(localStorageProfile).toMatchObject(expected);
   });
 });
 
