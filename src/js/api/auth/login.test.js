@@ -14,13 +14,16 @@ const expected = {
     },
     accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....",
   },
-  meta: {},
 };
+
+// const errorMessage = "Bad Request";
 
 const mockFetch = jest.fn().mockResolvedValue({
   ok: true,
   json: jest.fn().mockResolvedValue(expected),
 });
+
+// const mockFail = jest.fn().mockRejectedValue(errorMessage);
 
 class LocalStorageMock {
   constructor() {
@@ -46,12 +49,23 @@ class LocalStorageMock {
 
 global.localStorage = new LocalStorageMock();
 
-global.fetch = mockFetch;
-
 describe("login", () => {
-  it("sends your username and password to the backend and returns a JWT if OK", async () => {
-    const data = await login();
-    console.log(data.data.accessToken);
-    expect(data.data.accessToken).toEqual(expected.data.accessToken);
+  it("sends your username and password to the backend and returns a JWT when OK", async () => {
+    global.fetch = mockFetch;
+    const truedata = await login("first.last@stud.noroff.no", "mypass");
+    const localStorageAccessToken = localStorage.getItem("token");
+    console.log(localStorageAccessToken);
+    expect(truedata.data.accessToken).toEqual(expected.data.accessToken);
   });
 });
+
+// it("checks your username and password and refuses your call if not OK", async () => {
+//   global.fetch = mockFail;
+//   const falseData = await login("e", "o");
+//   console.log(falseData);
+//   await expect(falseData.reject(new Error(errorMessage))).rejects.toThrow(
+//     errorMessage
+//   );
+// });
+// I think my successful login version is OK, but I am not happy with the rejected one.
+// Can't figure it out though and have to look  at something else  atm - no time
