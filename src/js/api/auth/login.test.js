@@ -1,5 +1,10 @@
 import { login } from "./login.js";
 
+// login  credentials
+// name 	vegar
+// email 	no@noroff.no
+// pass 	pass123123
+
 const expected = {
   name: "vegar",
   email: "no@noroff.no",
