@@ -25,6 +25,6 @@ describe("login correct credentials", () => {
     cy.wait(5000);
 
     // UI should show the logged in page / contains h4 === username && <span class="text-muted d-block profile-email">no@noroff.no</span>
-    cy.get("[data-visible='loggedIn']").should("exist").end();
+    cy.get("[data-visible='loggedIn']").should("exist").contains("vegar").end();
   });
 });
